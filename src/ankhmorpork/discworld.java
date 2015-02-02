@@ -115,7 +115,7 @@ public class discworld extends Applet implements ActionListener, WindowListener 
 	
 		
 	if (e.getSource() == Exit){
-	    a.setVisible(false);    
+		fStartWindow.setVisible(false);    
 	    }
 	
 	    
@@ -145,7 +145,7 @@ public class discworld extends Applet implements ActionListener, WindowListener 
 				//Player4= JOptionPane.showInputDialog("Please input mark for Player 4: ");
 			}
 	    
-		a.setVisible( false );
+			fStartWindow.setVisible( false );
 		oDoubleBufferPanel.setLayout(new BorderLayout());
 		oBufferPanel.setLayout( new BorderLayout() );	
 		mainFrame.setSize( 2000,1500 );
