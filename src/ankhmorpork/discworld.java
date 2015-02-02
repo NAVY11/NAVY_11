@@ -40,7 +40,7 @@ public class discworld extends Applet implements ActionListener, WindowListener 
 	static discworldboard discworldboard;
 	static final DoubleBufferPanel oDoubleBufferPanel = new DoubleBufferPanel();
 	static final BufferPanel oBufferPanel = new BufferPanel();
-	static final Frame a = new Frame();
+	static final Frame fStartWindow = new Frame();
 	private Button Roll  = new Button( "Roll Dice" );
 	static final Button start2 = new Button( "Two Player" );		
 	static final Button start3 = new Button( "Three Player" );
@@ -83,10 +83,10 @@ public class discworld extends Applet implements ActionListener, WindowListener 
  
 	public void init() {
 
-		a.setSize( 380, 390 );
-		a.setBackground(new Color( (20), (100), (90) ));
-		a.setLayout(new FlowLayout(FlowLayout.CENTER));
-		a.setResizable(false);
+		fStartWindow.setSize( 380, 390 );
+		fStartWindow.setBackground(new Color( (20), (100), (90) ));
+		fStartWindow.setLayout(new FlowLayout(FlowLayout.CENTER));
+		fStartWindow.setResizable(false);
 		Panel mainstuff = new Panel(new GridLayout(0,1));
 		//mainstuff.add(comments2);
 		//mainstuff.add(comments4);
@@ -97,8 +97,8 @@ public class discworld extends Applet implements ActionListener, WindowListener 
 		mainstuff.add( start4 );
 		mainstuff.add(load);
 		mainstuff.add(Exit);
-		a.add(mainstuff);
-		a.setVisible( true );
+		fStartWindow.add(mainstuff);
+		fStartWindow.setVisible( true );
 		
 		Exit.addActionListener(this);
 		Info.addActionListener(this);
