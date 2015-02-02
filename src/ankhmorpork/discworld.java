@@ -38,16 +38,10 @@ public class discworld extends Applet implements ActionListener, WindowListener 
 	private static final long serialVersionUID = 1L;
 	static Frame mainFrame = new Frame( " Ank Morpork " );
 	static discworldboard discworldboard;
-	static final DoubleBufferPanel dbp = new DoubleBufferPanel();
-	static final BufferPanel bp = new BufferPanel();
+	static final DoubleBufferPanel oDoubleBufferPanel = new DoubleBufferPanel();
+	static final BufferPanel oBufferPanel = new BufferPanel();
 	static final Frame a = new Frame();
-	//static final Frame b = new Frame();//for player
-	private Button yes = new Button(" Yes ");
-	private Button no = new Button (" No ");
 	private Button Roll  = new Button( "Roll Dice" );
-
-//	private List property;// = new List();
-
 	static final Button start2 = new Button( "Two Player" );		
 	static final Button start3 = new Button( "Three Player" );
 	static final Button start4 = new Button( "Four Player" );
@@ -152,14 +146,14 @@ public class discworld extends Applet implements ActionListener, WindowListener 
 			}
 	    
 		a.setVisible( false );
-		dbp.setLayout(new BorderLayout());
-		bp.setLayout( new BorderLayout() );	
+		oDoubleBufferPanel.setLayout(new BorderLayout());
+		oBufferPanel.setLayout( new BorderLayout() );	
 		mainFrame.setSize( 2000,1500 );
 		mainFrame.setBackground(new Color( (100), (180), (150) ) ); //blue color
 		mainFrame.setLayout( new FlowLayout(FlowLayout.CENTER));
-		mainFrame.add(dbp );
-		dbp.add( "Center", bp );
-		bp.add( discworldboard);
+		mainFrame.add(oDoubleBufferPanel );
+		oDoubleBufferPanel.add( "Center", oBufferPanel );
+		oBufferPanel.add( discworldboard);
 		
 		
 		Panel buttons = new Panel(new GridLayout(0,1));
