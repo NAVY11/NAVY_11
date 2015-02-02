@@ -16,10 +16,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
 import ankhmorpork.GameLoad.GameStart;
+import ankhmorpork.GameObjects.Player;
 import ViewFile.SaveFileAmbg;
 import ViewFile.ViewFileAmbg;
 ///////////////////////////////////////////////////
@@ -180,8 +182,8 @@ public class discworldboard extends Component {
 		repaint();
 	}
 	
-	public void ViewGameState(){
-		String viewStateData = ViewFileAmbg.ViewState();
+	public void ViewGameState(ArrayList<Player> lstPlayers){
+		String viewStateData = ViewFileAmbg.ViewState(lstPlayers);
 		SaveFileAmbg abc = new SaveFileAmbg();
 		abc.Viewer(viewStateData);
 	}

@@ -12,7 +12,7 @@ import ankhmorpork.GameObjects.Player;
 
 public class ViewFileAmbg {
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 
 		String sb = dataToStoreInTextFile();
 	    JFileChooser chooser = new JFileChooser();
@@ -28,19 +28,20 @@ public class ViewFileAmbg {
 	        }
 	    }
 	}
+	*/
 	
-	public static String ViewState(){
-		return dataToStoreInTextFile();
+	public static String ViewState(ArrayList<Player> lstPlayers){
+		return dataToStoreInTextFile(lstPlayers);
 	}
 	
-	public static String dataToStoreInTextFile(){
+	public static String dataToStoreInTextFile(ArrayList<Player> lstPlayers){
 		String saveTheDetailsInTextFile = "";
 		
-		saveTheDetailsInTextFile += playerGeneralInfo(InitializePlayers());
+		saveTheDetailsInTextFile += playerGeneralInfo(lstPlayers);
 		saveTheDetailsInTextFile += "\n\n";
 		saveTheDetailsInTextFile += areaDetails();
 		saveTheDetailsInTextFile += "\n\n";
-		saveTheDetailsInTextFile += playerDetails(InitializePlayers());
+		saveTheDetailsInTextFile += playerDetails(lstPlayers);
 		saveTheDetailsInTextFile += "\n\n";
 		saveTheDetailsInTextFile += totalAmountBankOwns();
 		
@@ -132,14 +133,14 @@ public class ViewFileAmbg {
 	public static String areaDetails(){
 		
 		String areaDetails = "\n\nCurrent State of the Game Board: ";
-		areaDetails += "\n\t\tarea\t\t\t\t\t\tminions\t\t\ttrouble?\t\t\tbuildings?\t\t\tdemons\t\ttrolls";
+		areaDetails += "\n\tarea\tminions\t\t\ttrouble?\tbuildings?\tdemons\ttrolls";
 		
 		for(int i = 1; i < 12; i++){
-			areaDetails += "\n\t"+paddingToMakeSixteen(PresentationUtility.getCityAreaCardNameById(i))+"\t\t\t\t"
-					+Area.getListOfMinionsByAreaId(i)+ "\t\t\t"
-					+Area.getListOfTroubleMakersByAreaId(i)+ "\t\t\t\t\t"
-					+Area.getListOfBuildingsByAreaId(i)+ "\t\t\t\t\t"
-					+Area.getListOfDemonsByAreaId(i)+ "\t\t\t\t"
+			areaDetails += "\n\t"+paddingToMakeSixteen(PresentationUtility.getCityAreaCardNameById(i))+"\t"
+					+Area.getListOfMinionsByAreaId(i)+ "\t"
+					+Area.getListOfTroubleMakersByAreaId(i)+ "\t"
+					+Area.getListOfBuildingsByAreaId(i)+ "\t"
+					+Area.getListOfDemonsByAreaId(i)+ "\t"
 					+Area.getListOfTrollsByAreaId(i)+ "\t";
 		}
 		return areaDetails;

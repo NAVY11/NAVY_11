@@ -1,6 +1,7 @@
 package ankhmorpork.GameObjects;
 import java.util.ArrayList;
 
+import PresentationUtilityCommon.PresentationUtility;
 import ankhmorpork.GameConstants.Constants;
 
 public class Player {
@@ -11,15 +12,60 @@ public class Player {
 	String player_color;
 	Float player_amount;
 	Integer player_personality_card_id;
+	String brownCardListCommaSeparated;
+	String greenCardListCommaSeparated;
+	String cityAreaCardsListCommaSeparated;
+	String personalityCardListCommaSeparated;
+	
+	public String getBrownCardListCommaSeparated() {
+		return brownCardListCommaSeparated;
+	}
+	public void setBrownCardListCommaSeparated(String brownCardListCommaSeparated) {
+		this.brownCardListCommaSeparated = brownCardListCommaSeparated;
+	}
+	public String getGreenCardListCommaSeparated() {
+		return greenCardListCommaSeparated;
+	}
+	public void setGreenCardListCommaSeparated(String greenCardListCommaSeparated) {
+		this.greenCardListCommaSeparated = greenCardListCommaSeparated;
+	}
+	public String getCityAreaCardsListCommaSeparated() {
+		return cityAreaCardsListCommaSeparated;
+	}
+	public void setCityAreaCardsListCommaSeparated(
+			String cityAreaCardsListCommaSeparated) {
+		this.cityAreaCardsListCommaSeparated = cityAreaCardsListCommaSeparated;
+	}
+	public String getPersonalityCardListCommaSeparated() {
+		return personalityCardListCommaSeparated;
+	}
+	public void setPersonalityCardListCommaSeparated(
+			String personalityCardListCommaSeparated) {
+		this.personalityCardListCommaSeparated = personalityCardListCommaSeparated;
+	}
+
 	public ArrayList<Minion> lstMinions = new ArrayList<Minion>();
-	public ArrayList<Building> lstBuildings = new ArrayList<Building>();	
-	//public Coins objGoldCoin = new Coins(Constants.GoldCoin());
-	//public Coins objSilverCoin = new Coins(Constants.SilverCoin());
+	public ArrayList<Building> lstBuildings = new ArrayList<Building>();
+	public ArrayList<Demon> lstDemons = new ArrayList<Demon>();
+	public ArrayList<Troll> lststTrolls = new ArrayList<Troll>();
+	
+	ArrayList<Integer> initializingBrownCardsArr = PresentationUtility.initializeAArrayWithValue(53);
+	ArrayList<Integer> initializingGreenCardsArr = PresentationUtility.initializeAArrayWithValue(48);
+	ArrayList<Integer> initializingCityAreaCardsArr = PresentationUtility.initializeAArrayWithValue(12);
+	ArrayList<Integer> initializingPersonalityArr = PresentationUtility.initializeAArrayWithValue(7);
+	
+	//HashMap<Integer, Boolean> initializingBrownCards = PresentationUtility.initializeAHashmapWithValue(53);
+	//HashMap<Integer, Boolean> initializingGreenCards = PresentationUtility.initializeAHashmapWithValue(48);
+	//HashMap<Integer, Boolean> initializingCityAreaCards = PresentationUtility.initializeAHashmapWithValue(12);
+	//HashMap<Integer, Boolean> initializingPersonalityCards = PresentationUtility.initializeAHashmapWithValue(7);
+	
+	String getFiveDifferentBrownNumbers = "", getFiveDifferentGreenNumbers = "";
+	Integer getOneDifferentPersonalityCard;
 	public ArrayList<Coins> lstGoldCoin = new ArrayList<Coins>();
 	public ArrayList<Coins> lstSilverCoin = new ArrayList<Coins>();
 	
 	public Integer getPlayer_id() {
-		return player_id;
+		return player_id; 
 	}
 	public void setPlayer_id(Integer player_id) {
 		this.player_id = player_id;
@@ -42,7 +88,6 @@ public class Player {
 	public void setPlayer_color(String player_color) {
 		this.player_color = player_color;
 	}
-	
 	public Float getPlayer_amount() {
 		return player_amount;
 	}
@@ -57,23 +102,20 @@ public class Player {
 		this.player_personality_card_id = player_personality_card_id;
 	}
 	
-	
 	//Constructor
-	public Player(Integer PlayerID, String PlayerName, String PlayerColour)
-	{
+	public Player(Integer PlayerID, String PlayerName, String PlayerColour){
 		this.setPlayer_id(PlayerID);
 		this.setPlayer_name(PlayerName);
 		this.setPlayer_color(PlayerColour);
 		this.setPlayer_active(true);
 		
 		//Create minions for this Player
-		for(int i=1; i<=Constants.MinionsPerPlayer();i++)
-		{
+		for(int i=1; i<=Constants.MinionsPerPlayer();i++){
+			
 			Integer MinionID = 100*PlayerID + i;
 			Integer BuildingID = MinionID;
 			Integer AreaCode = 0;
-			if(i<4)
-			{
+			if(i<4){
 				if(i==1)
 				{
 					AreaCode=1;
@@ -92,16 +134,106 @@ public class Player {
 			Building objBuilding = new Building(BuildingID,PlayerColour,0,PlayerID);
 			this.lstBuildings.add(objBuilding);
 		}
-	
-		Coins GoldCoin = new Coins(Constants.GoldCoin());
-		this.lstGoldCoin.add(GoldCoin);
-		Coins SilverCoin = new Coins(Constants.SilverCoin());
-		this.lstSilverCoin.add(SilverCoin);
-	
+		getFiveDifferentBrownNumbers = "";
+		getFiveDifferentGreenNumbers = "";
+		
+		int countBrownCard = 0;
+		int countGreenCard = 0;
+		/*
+		 * while(true){
+			Integer randomNumber = PresentationUtility.returnRandomNumber(1, 53);
+			if(randomNumber > 0){
+				if(initializingBrownCards.containsKey(randomNumber)){
+					getFiveDifferentBrownNumbers += randomNumber+",";
+					countBrownCard += 1;
+					initializingBrownCards.remove(randomNumber);
+				}
+				if(countBrownCard == 5){
+					if (getFiveDifferentBrownNumbers.endsWith(",")) {
+						getFiveDifferentBrownNumbers = getFiveDifferentBrownNumbers.substring(0, getFiveDifferentBrownNumbers.length() - 1);
+					}
+					//Create Brown Card Object and assign cards
+					System.out.print("PlayerId : "+ PlayerID + " - Brown Card: " + getFiveDifferentBrownNumbers + "\n");
+					break;
+				}
+			}
+		}
+		 */
+		while(true){
+			Integer randomIndexNumber = PresentationUtility.returnRandomNumber(1, initializingBrownCardsArr.size());
+			Integer randomNumberAtIndexNumber = initializingBrownCardsArr.get(randomIndexNumber);
+			
+			if(randomNumberAtIndexNumber > 0){
+				getFiveDifferentBrownNumbers += randomNumberAtIndexNumber+",";
+				countBrownCard += 1;
+				initializingBrownCardsArr.remove(randomNumberAtIndexNumber);
+			
+				if(countBrownCard == 5){
+					if (getFiveDifferentBrownNumbers.endsWith(",")) {
+						getFiveDifferentBrownNumbers = getFiveDifferentBrownNumbers.substring(0, getFiveDifferentBrownNumbers.length() - 1);
+					}
+					
+					setBrownCardListCommaSeparated(getFiveDifferentBrownNumbers);
+					//Create Brown Card Object and assign cards
+					System.out.print("PlayerId : "+ PlayerID + " - Brown Card: " + getFiveDifferentBrownNumbers + "\n");
+					break;
+				}
+			}
+		}
+		/*
+		 * while(true){
+			Integer randomNumber = PresentationUtility.returnRandomNumber(1, 48);
+			if(randomNumber > 0){
+				if(initializingGreenCards.containsKey(randomNumber)){
+					getFiveDifferentGreenNumbers += randomNumber+",";
+					countGreenCard += 1;
+					initializingBrownCards.remove(randomNumber);
+				}
+				if(countGreenCard == 5){
+					if (getFiveDifferentGreenNumbers.endsWith(",")) {
+						getFiveDifferentGreenNumbers = getFiveDifferentGreenNumbers.substring(0, getFiveDifferentGreenNumbers.length() - 1);
+					}
+					System.out.print("PlayerId : "+ PlayerID + " - Green Card: " + getFiveDifferentGreenNumbers + "\n");
+					//Create Green Card Object and assign cards
+					break;
+				}
+			}
+		}
+		
+		 */
+		
+		while(true){
+			Integer randomIndexNumber = PresentationUtility.returnRandomNumber(1, initializingGreenCardsArr.size());
+			Integer randomNumberAtIndexNumber = initializingGreenCardsArr.get(randomIndexNumber);
+			
+			if(randomNumberAtIndexNumber > 0){
+				getFiveDifferentGreenNumbers += randomNumberAtIndexNumber+",";
+				countGreenCard += 1;
+				initializingGreenCardsArr.remove(randomNumberAtIndexNumber);
+			
+				if(countGreenCard == 5){
+					if (getFiveDifferentGreenNumbers.endsWith(",")) {
+						getFiveDifferentGreenNumbers = getFiveDifferentGreenNumbers.substring(0, getFiveDifferentGreenNumbers.length() - 1);
+					}
+					setGreenCardListCommaSeparated(getFiveDifferentGreenNumbers);
+					//Create Green Card Object and assign cards
+					System.out.print("PlayerId : "+ PlayerID + " - Green Card: " + getFiveDifferentGreenNumbers + "\n");
+					break;
+				}
+			}
+		}
+
+		Integer randomIndexNumber = PresentationUtility.returnRandomNumber(1, initializingPersonalityArr.size());
+		Integer randomNumberAtIndexNumber = initializingPersonalityArr.get(randomIndexNumber);
+		
+		if(randomNumberAtIndexNumber > 0){
+			getOneDifferentPersonalityCard = randomNumberAtIndexNumber;
+			initializingPersonalityArr.remove(randomNumberAtIndexNumber);
+			setPersonalityCardListCommaSeparated(getOneDifferentPersonalityCard+"");
+			//Create One Different Personality Card
+			System.out.print("PlayerId : "+ PlayerID + " - Personality Card: " + getOneDifferentPersonalityCard + "\n");
+		}
 	}
-	
-	
-	
 	public Player() {
 		// TODO Auto-generated constructor stub
 	}
