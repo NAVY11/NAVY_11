@@ -61,42 +61,22 @@ public class GameSave {
 			jsonAddData.put("Buildings_"+PlayerID,objPlayer.lstBuildings);
 
 			//Saving MINIONS
-			JSONObject jsonPlayerMinions = new JSONObject();
-			//jsonPlayerMinions.put("Minions_"+PlayerID, objPlayer.lstMinions);
-			//jsonWriter.write(jsonPlayerMinions.toString());
+			JSONObject jsonPlayerMinions = new JSONObject();			
 			jsonAddData.put("Minions_"+PlayerID, objPlayer.lstMinions);
 			
-			jsonAddData.put("GoldCoins_"+PlayerID,objPlayer.lstGoldCoin);
+			//Saving GOLD COINS
+			jsonAddData.put("GoldCoins_Avail_"+PlayerID,objPlayer.objGoldCoin.getCoin_Available());
 			
-			//Saving silvercoins
-			jsonAddData.put("SilverCoins_"+PlayerID,objPlayer.lstSilverCoin);
+			//Saving SILVER COINS
+			jsonAddData.put("SilverCoins_Avail_"+PlayerID,objPlayer.objSilverCoin.getCoin_Available());
 			
 			PlayerID++;
-//			int i = 1;
-//			int j = i;
-//			for(Minion objMinion: objPlayer.lstMinions)
-//			{
-//				
-//				JSONObject jsonMinion = new JSONObject();
-//				jsonMinion.put("Mnion"+ Integer.toString(j*100+j),objMinion);
-//				jsonPlayerMinions.add(jsonMinion);
-//				j++;
-//			}
-//			jsonPlayer.put("lstMinionsPlayer"+i, jsonPlayerMinions);
-//			jsonPlayerMinionsXX = jsonPlayerMinions;
-//			jsonGamePlayers.add(jsonPlayer);
-//			i++;
+			
 		}
-		//jsonGame.put("lstPlayers",jsonGamePlayers);
 		
-			
-			//Player Player1 = NewGame.lstPlayers.get(0);						
-			
-			//jsonWriter.write(jsonGame.toString());
-			//jsonWriter.write(jsonPlayerMinionsXX.toString());
 			jsonWriter.write(jsonAddData.toString());
 			jsonWriter.flush();
-			jsonWriter.close();											
+			jsonWriter.close();										
 	}
 
 }
