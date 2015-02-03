@@ -10,12 +10,14 @@ public class Player {
 	String player_name;
 	Boolean player_active;
 	String player_color;
-	Float player_amount;
+//	Float player_amount;
 	Integer player_personality_card_id;
 	String brownCardListCommaSeparated;
 	String greenCardListCommaSeparated;
 	String cityAreaCardsListCommaSeparated;
 	String personalityCardListCommaSeparated;
+	public Coins objGoldCoin = new Coins(Constants.GoldCoin());
+	public Coins objSilverCoin = new Coins(Constants.SilverCoin());
 	
 	public String getBrownCardListCommaSeparated() {
 		return brownCardListCommaSeparated;
@@ -88,12 +90,12 @@ public class Player {
 	public void setPlayer_color(String player_color) {
 		this.player_color = player_color;
 	}
-	public Float getPlayer_amount() {
-		return player_amount;
-	}
-	public void setPlayer_amount(Float player_amount) {
-		this.player_amount = player_amount;
-	}
+//	public Float getPlayer_amount() {
+//		return player_amount;
+//	}
+//	public void setPlayer_amount(Float player_amount) {
+//		this.player_amount = player_amount;
+//	}
 	
 	public Integer getPlayer_personality_card_id() {
 		return player_personality_card_id;
@@ -102,6 +104,12 @@ public class Player {
 		this.player_personality_card_id = player_personality_card_id;
 	}
 	
+	public int getPlayerAmount()
+	{
+		int iTotalAmount = 0;
+		iTotalAmount = this.objGoldCoin.getCoin_Available()*this.objGoldCoin.getCoin_Val() + this.objSilverCoin.getCoin_Val()*this.objSilverCoin.getCoin_Available();
+		return iTotalAmount;
+	}
 	//Constructor
 	public Player(Integer PlayerID, String PlayerName, String PlayerColour){
 		this.setPlayer_id(PlayerID);
