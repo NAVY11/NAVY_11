@@ -16,39 +16,34 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
 
 import javax.swing.JOptionPane;
 
-import org.json.JSONException;
-import org.json.simple.parser.ParseException;
-
-import ankhmorpork.Game.Game;
-import ankhmorpork.GameLoad.GameLoad;
-import ankhmorpork.GameLoad.GameSave;
 import ankhmorpork.GameLoad.GameStart;
-import ankhmorpork.GameObjects.Area;
-import ankhmorpork.GameObjects.Demon;
-import ankhmorpork.GameObjects.Minion;
-import ankhmorpork.GameObjects.Player;
-import ankhmorpork.GameObjects.Troll;
 import ViewFile.SaveFileAmbg;
 import ViewFile.ViewFileAmbg;
-
+///////////////////////////////////////////////////
 public class discworldboard extends Component {
 	
+	private static final long serialVersionUID = 1L;
+
 	private int Width  = 1200;
 	private int Height = 900;
 	private discworld discworld;
 	static final Frame quit = new Frame("Are you sure?");
+	static final Frame pr = new Frame("Properties");
+	static final Choice choice = new Choice();
+	static final Choice p2 = new Choice();	
+	private Image board;
+	// if turn == true, it is player1's turn
+	public boolean turn   = true;
+	// if rolled == true, the player has already rolled.
 	public boolean rolled = false;
-		private int Dice1 = 0;
+	// the numbers on the dice
+	private int Dice1 = 0;
 
-
+////////////////////////////////////////////////////////////////////////////////////
+	//public discworldboard( String one, String two ) {
 		public discworldboard( ) {
 
 
@@ -166,7 +161,7 @@ public class discworldboard extends Component {
 		    public void actionPerformed ( ActionEvent e) {
 			//System.out.println("quit");
 			quit.setVisible(false);
-			discworld.AnkhmorporkFrame.setVisible(false);//System.exit(0);
+			discworld.mainFrame.setVisible(false);//System.exit(0);
 			}
 			});
 		quit.addWindowListener( new WindowAdapter() {
@@ -191,29 +186,58 @@ public class discworldboard extends Component {
 		abc.Viewer(viewStateData);
 	}
 	
-	public void SaveGame(FileWriter objFileWriter, Game PlayedGame) throws IOException, JSONException{
-		GameSave.SaveGame(objFileWriter, PlayedGame);
+	public void SaveGame(){
+		
 	}
 	
-	public void Loadgamefetch(FileReader objFileReader) throws IOException, ParseException
+	public void Two_Player_details()
 	{
-		 GameLoad.LoadGame(objFileReader);
-	}
-	
-	public void InitialiseGame(int iNoOfPlayers, Game AnkhMorpork)
-	{					
+		
+		int input = 2;		
 		String[] Players = new String[10];
 		String[] Colors = new String[10];
-		for(int i=1;i<=iNoOfPlayers;i++)
+		for(int i=1;i<=input;i++)
 		{
 		Players[i]= JOptionPane.showInputDialog("Please input Name for Player:" + i);
 		Colors[i] = JOptionPane.showInputDialog("Please input Color for Player:" + i);
 		}
-	
-		GameStart.StartNewGame(Players, Colors, iNoOfPlayers, AnkhMorpork);
+		GameStart gs2 = new GameStart();
+	    gs2.Set_Players_details(Players, Colors, input);
+		
 	}
 	
-	
+	public void Three_Player_details()
+	{
+		
+		int input = 3;		
+		String[] Players = new String[10];
+		String[] Colors = new String[10];
+		for(int i=1;i<=input;i++)
+		{
+		Players[i]= JOptionPane.showInputDialog("Please input Name for Player:" + i);
+		Colors[i] = JOptionPane.showInputDialog("Please input Color for Player:" + i);
+		}
+		GameStart gs3 = new GameStart();
+	    gs3.Set_Players_details(Players, Colors, input);
+		
+	}
+
+	public void Four_Player_details()
+	{
+		
+		int input = 4;		
+		String[] Players = new String[10];
+		String[] Colors = new String[10];
+		for(int i=1;i<=input;i++)
+		{
+		Players[i]= JOptionPane.showInputDialog("Please input Name for Player:" + i);
+		Colors[i] = JOptionPane.showInputDialog("Please input Color for Player:" + i);
+		}
+		GameStart gs4 = new GameStart();
+	    gs4.Set_Players_details(Players, Colors, input);
+		
+	}
+
 	
 
 	//start a new game
@@ -238,6 +262,5 @@ public class discworldboard extends Component {
 		});
 		repaint();
 	}
-	
 }
 

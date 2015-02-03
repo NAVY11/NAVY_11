@@ -1,6 +1,5 @@
 package ankhmorpork.GameLoad;
 import ankhmorpork.Game.Game;
-import ankhmorpork.GameConstants.Constants;
 import ankhmorpork.GameObjects.*;
 
 import java.io.FileNotFoundException;
@@ -8,7 +7,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Iterator;
-
 
 //import org.json.JSONArray;
 import org.json.simple.JSONArray;
@@ -26,13 +24,15 @@ import org.json.simple.parser.ParseException;
 
 public class GameLoad {
 
-	public static Game LoadGame(FileReader objFileReader) throws IOException, ParseException
-	{		
+	public static Game LoadGame(String File) throws IOException, ParseException
+	{
+		System.out.println("Entered Load");
 		Game LoadedGame = new Game();
-		//FileReader objFilereader = new FileReader(File);		
-		JSONParser jsonParser = new JSONParser();		
-		JSONObject json = (JSONObject)jsonParser.parse(objFileReader);		
-		
+		FileReader objFilereader = new FileReader(File);		
+		JSONParser jsonParser = new JSONParser();
+		System.out.println("Parse Created");
+		JSONObject json = (JSONObject)jsonParser.parse(objFilereader);
+		System.out.println("Parsed to JSON");
 		//Loading TROLLS
 		JSONArray Trolls = (JSONArray)json.get("Trolls");
 		Iterator iTroll = Trolls.iterator();
@@ -101,42 +101,31 @@ public class GameLoad {
 				Player.lstBuildings.add(objBuilding);
 			}
 			
-			//Loading Player GOLD COINS
-			//JSONObject jsonGoldCoin = (JSONObject)json.get("GoldCoins_"+Player.getPlayer_id());
-			Player.objGoldCoin.setCoin_Type(Constants.GoldCoin());
-			Player.objGoldCoin.setCoin_Available(Integer.parseInt(json.get("GoldCoins_Avail_"+Player.getPlayer_id()).toString()));
-			Player.objGoldCoin.setCoin_Val(Constants.GoldCoinValue());
-			
-			//Loading Player SILVER COINS						
-			Player.objSilverCoin.setCoin_Type(Constants.SilverCoin());
-			Player.objSilverCoin.setCoin_Available(Integer.parseInt(json.get("SilverCoins_Avail_"+Player.getPlayer_id()).toString()));
-			Player.objSilverCoin.setCoin_Val(Constants.SilverCoinValue());
-			
-//			JSONArray GoldCoin = (JSONArray)json.get("GoldCoins_"+Player.getPlayer_id());
-//			Iterator iGoldCoin = GoldCoin.iterator();
-//			while(iGoldCoin.hasNext())
-//			{
-//				Coins objGoldCoin = new Coins();
-//				JSONObject jsonGoldCoin = (JSONObject)iGoldCoin.next();
-//				objGoldCoin.setCoin_Type((String)jsonGoldCoin.get("coin_Type"));
-//				objGoldCoin.setCoin_Val(Integer.parseInt(jsonGoldCoin.get("coin_Val").toString()));
-//				objGoldCoin.setCoin_Available(Integer.parseInt(jsonGoldCoin.get("coin_Available").toString()));
-//				Player.lstGoldCoin.add(objGoldCoin);
-//			}
+			JSONArray GoldCoin = (JSONArray)json.get("GoldCoins_"+Player.getPlayer_id());
+			Iterator iGoldCoin = GoldCoin.iterator();
+			while(iGoldCoin.hasNext())
+			{
+				Coins objGoldCoin = new Coins();
+				JSONObject jsonGoldCoin = (JSONObject)iGoldCoin.next();
+				objGoldCoin.setCoin_Type((String)jsonGoldCoin.get("coin_Type"));
+				objGoldCoin.setCoin_Val(Integer.parseInt(jsonGoldCoin.get("coin_Val").toString()));
+				objGoldCoin.setCoin_Available(Integer.parseInt(jsonGoldCoin.get("coin_Available").toString()));
+				Player.lstGoldCoin.add(objGoldCoin);
+			}
 			
 			
 			//Loading silvercoins
-//			JSONArray SilverCoin = (JSONArray)json.get("SilverCoins_"+Player.getPlayer_id());
-//			Iterator iSilverCoin = SilverCoin.iterator();
-//			while(iSilverCoin.hasNext())
-//			{
-//				Coins objSilverCoin = new Coins();
-//				JSONObject jsonSilverCoin = (JSONObject)iSilverCoin.next();
-//				objSilverCoin.setCoin_Type((String)jsonSilverCoin.get("coin_Type"));
-//				objSilverCoin.setCoin_Val(Integer.parseInt(jsonSilverCoin.get("coin_Val").toString()));
-//				objSilverCoin.setCoin_Available(Integer.parseInt(jsonSilverCoin.get("coin_Available").toString()));
-//				Player.lstSilverCoin.add(objSilverCoin);
-//			}
+			JSONArray SilverCoin = (JSONArray)json.get("SilverCoins_"+Player.getPlayer_id());
+			Iterator iSilverCoin = SilverCoin.iterator();
+			while(iSilverCoin.hasNext())
+			{
+				Coins objSilverCoin = new Coins();
+				JSONObject jsonSilverCoin = (JSONObject)iSilverCoin.next();
+				objSilverCoin.setCoin_Type((String)jsonSilverCoin.get("coin_Type"));
+				objSilverCoin.setCoin_Val(Integer.parseInt(jsonSilverCoin.get("coin_Val").toString()));
+				objSilverCoin.setCoin_Available(Integer.parseInt(jsonSilverCoin.get("coin_Available").toString()));
+				Player.lstSilverCoin.add(objSilverCoin);
+			}
 			
 			
 			

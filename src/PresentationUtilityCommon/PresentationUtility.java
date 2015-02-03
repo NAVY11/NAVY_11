@@ -1,6 +1,7 @@
 package PresentationUtilityCommon;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -83,4 +84,46 @@ public class PresentationUtility {
 	        default: return IConstants.cityCardArea12;
 		}
 	}
+	
+public static HashMap<Integer, Boolean> initializeAHashmapWithValue(Integer numberToInitialize){
+		
+		HashMap<Integer, Boolean> mapToIntialize = new HashMap<Integer, Boolean>();
+		
+		for (int i = 1; i<numberToInitialize; i++){
+			mapToIntialize.put(i, false);
+		}
+		return mapToIntialize;
+	}
+	
+	public static ArrayList<Integer> initializeAArrayWithValue(Integer numberToInitialize){
+		
+		ArrayList<Integer> arrToIntialize = new ArrayList<Integer>();
+		
+		for (int i = 1; i <= numberToInitialize; i++){
+			arrToIntialize.add(i);
+		}
+		
+		return arrToIntialize;
+	}
+	/**
+	 * 
+	 * @param currentPlayer
+	 * @param numberOfPlayers
+	 * @return
+	 */
+	public static Integer nextPlayerTurn(Integer currentPlayer, Integer numberOfPlayers){
+		if(currentPlayer == numberOfPlayers){
+			System.out.print("Next Player would be : Player " + 1);
+			return 1;
+		}else{
+			System.out.print("Next Player would be : Player "+(currentPlayer+1));
+			return (currentPlayer+1);  
+		}
+	}
+	/*
+		public static void main(String argv[]){
+			nextPlayerTurn(4, 4);
+		}
+	*/
+	
 }

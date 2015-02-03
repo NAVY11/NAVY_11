@@ -71,23 +71,10 @@ public class GameSave {
 			jsonAddData.put("SilverCoins_Avail_"+PlayerID,objPlayer.objSilverCoin.getCoin_Available());
 			
 			PlayerID++;
-//			int i = 1;
-//			int j = i;
-//			for(Minion objMinion: objPlayer.lstMinions)
-//			{
-//				
-//				JSONObject jsonMinion = new JSONObject();
-//				jsonMinion.put("Mnion"+ Integer.toString(j*100+j),objMinion);
-//				jsonPlayerMinions.add(jsonMinion);
-//				j++;
-//			}
-//			jsonPlayer.put("lstMinionsPlayer"+i, jsonPlayerMinions);
-//			jsonPlayerMinionsXX = jsonPlayerMinions;
-//			jsonGamePlayers.add(jsonPlayer);
-//			i++;
+			
 		}
-		//jsonGame.put("lstPlayers",jsonGamePlayers);
 		
+<<<<<<< HEAD
 			
 			//Player Player1 = NewGame.lstPlayers.get(0);						
 			
@@ -96,6 +83,11 @@ public class GameSave {
 		objFileWriter.write(jsonAddData.toString());
 		objFileWriter.flush();
 		objFileWriter.close();											
+=======
+			jsonWriter.write(jsonAddData.toString());
+			jsonWriter.flush();
+			jsonWriter.close();										
+>>>>>>> branch 'master' of https://github.com/NAVY11/NAVY_11.git
 	}
 
 }
