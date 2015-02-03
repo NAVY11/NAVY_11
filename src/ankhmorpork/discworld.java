@@ -56,7 +56,7 @@ public class discworld extends Applet implements ActionListener, WindowListener 
 
 	Image back ;
 
-	//ashish code
+	
     public static void main(String argv[]) 
     {
 
@@ -128,17 +128,17 @@ public class discworld extends Applet implements ActionListener, WindowListener 
 			if(e.getSource() == start2)
 			{
 				
-				discworldboard.Two_Player_details();
+				discworldboard.InitializeGame(2);
 											
 			}else if(e.getSource() == start3){
 				
-				discworldboard.Three_Player_details();
+				discworldboard.InitializeGame(3);
 				//Player1= JOptionPane.showInputDialog("Please input mark for Player 1: ");
 				 //Player2= JOptionPane.showInputDialog("Please input mark for Player 2: ");
 				 //Player3= JOptionPane.showInputDialog("Please input mark for Player 3: ");
 			}else if(e.getSource() == start4){
 				
-				discworldboard.Four_Player_details();
+				discworldboard.InitializeGame(4);
 				//Player1= JOptionPane.showInputDialog("Please input mark for Player 1: ");
 				//Player2= JOptionPane.showInputDialog("Please input mark for Player 2: ");
 				//Player3= JOptionPane.showInputDialog("Please input mark for Player 3: ");
