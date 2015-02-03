@@ -190,53 +190,51 @@ public class discworldboard extends Component {
 		
 	}
 	
-	public void Two_Player_details()
-	{
-		
-		int input = 2;		
+	public void InitializeGame(int iNoOfPlayers)
+	{				
 		String[] Players = new String[10];
 		String[] Colors = new String[10];
-		for(int i=1;i<=input;i++)
+		for(int i=1;i<=iNoOfPlayers;i++)
 		{
 		Players[i]= JOptionPane.showInputDialog("Please input Name for Player:" + i);
 		Colors[i] = JOptionPane.showInputDialog("Please input Color for Player:" + i);
 		}
-		GameStart gs2 = new GameStart();
-	    gs2.Set_Players_details(Players, Colors, input);
+		
+		GameStart.StartNewGame(Players, Colors, iNoOfPlayers);
 		
 	}
 	
-	public void Three_Player_details()
-	{
-		
-		int input = 3;		
-		String[] Players = new String[10];
-		String[] Colors = new String[10];
-		for(int i=1;i<=input;i++)
-		{
-		Players[i]= JOptionPane.showInputDialog("Please input Name for Player:" + i);
-		Colors[i] = JOptionPane.showInputDialog("Please input Color for Player:" + i);
-		}
-		GameStart gs3 = new GameStart();
-	    gs3.Set_Players_details(Players, Colors, input);
-		
-	}
-
-	public void Four_Player_details()
-	{
-		
-		int input = 4;		
-		String[] Players = new String[10];
-		String[] Colors = new String[10];
-		for(int i=1;i<=input;i++)
-		{
-		Players[i]= JOptionPane.showInputDialog("Please input Name for Player:" + i);
-		Colors[i] = JOptionPane.showInputDialog("Please input Color for Player:" + i);
-		}
-		GameStart gs4 = new GameStart();
-	    gs4.Set_Players_details(Players, Colors, input);
-		
-	}
+//	public void Three_Player_details()
+//	{
+//		
+//		int input = 3;		
+//		String[] Players = new String[10];
+//		String[] Colors = new String[10];
+//		for(int i=1;i<=input;i++)
+//		{
+//		Players[i]= JOptionPane.showInputDialog("Please input Name for Player:" + i);
+//		Colors[i] = JOptionPane.showInputDialog("Please input Color for Player:" + i);
+//		}
+//		GameStart gs3 = new GameStart();
+//	    gs3.Set_Players_details(Players, Colors, input);
+//		
+//	}
+//
+//	public void Four_Player_details()
+//	{
+//		
+//		int input = 4;		
+//		String[] Players = new String[10];
+//		String[] Colors = new String[10];
+//		for(int i=1;i<=input;i++)
+//		{
+//		Players[i]= JOptionPane.showInputDialog("Please input Name for Player:" + i);
+//		Colors[i] = JOptionPane.showInputDialog("Please input Color for Player:" + i);
+//		}
+//		GameStart gs4 = new GameStart();
+//	    gs4.Set_Players_details(Players, Colors, input);
+//		
+//	}
 
 	
 

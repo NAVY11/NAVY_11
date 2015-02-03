@@ -1,11 +1,15 @@
 package ankhmorpork.GameObjects;
 
+import ankhmorpork.GameConstants.Constants;
+
 public class Bank {
 	Float player_amount;
 	Integer player_personality_card_id;	
 	String cityAreaCardsListCommaSeparated;
 	String personalityCardListCommaSeparated;
-			
+	public Coins objGoldCoin = new Coins(Constants.GoldCoin());
+	public Coins objSilverCoin = new Coins(Constants.SilverCoin());
+	
 	public String getCityAreaCardsListCommaSeparated() {
 		return cityAreaCardsListCommaSeparated;
 	}
