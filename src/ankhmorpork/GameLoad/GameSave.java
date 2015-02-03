@@ -27,9 +27,9 @@ import jdk.nashorn.internal.runtime.Source;
 
 public class GameSave {
 
-	public static void SaveGame(String File, Game NewGame) throws IOException, JSONException
+	public static void SaveGame(FileWriter objFileWriter, Game NewGame) throws IOException, JSONException
 	{												
-		FileWriter jsonWriter = new FileWriter(File);
+		//FileWriter jsonWriter = new FileWriter(File);
 		JSONObject jsonAddData = new JSONObject();
 		//Saving TROLLS
 		JSONObject jsonGameTrolls = new JSONObject();
@@ -61,15 +61,14 @@ public class GameSave {
 			jsonAddData.put("Buildings_"+PlayerID,objPlayer.lstBuildings);
 
 			//Saving MINIONS
-			JSONObject jsonPlayerMinions = new JSONObject();
-			//jsonPlayerMinions.put("Minions_"+PlayerID, objPlayer.lstMinions);
-			//jsonWriter.write(jsonPlayerMinions.toString());
+			JSONObject jsonPlayerMinions = new JSONObject();			
 			jsonAddData.put("Minions_"+PlayerID, objPlayer.lstMinions);
 			
-			jsonAddData.put("GoldCoins_"+PlayerID,objPlayer.lstGoldCoin);
+			//Saving GOLD COINS
+			jsonAddData.put("GoldCoins_Avail_"+PlayerID,objPlayer.objGoldCoin.getCoin_Available());
 			
-			//Saving silvercoins
-			jsonAddData.put("SilverCoins_"+PlayerID,objPlayer.lstSilverCoin);
+			//Saving SILVER COINS
+			jsonAddData.put("SilverCoins_Avail_"+PlayerID,objPlayer.objSilverCoin.getCoin_Available());
 			
 			PlayerID++;
 //			int i = 1;
@@ -94,9 +93,9 @@ public class GameSave {
 			
 			//jsonWriter.write(jsonGame.toString());
 			//jsonWriter.write(jsonPlayerMinionsXX.toString());
-			jsonWriter.write(jsonAddData.toString());
-			jsonWriter.flush();
-			jsonWriter.close();											
+		objFileWriter.write(jsonAddData.toString());
+		objFileWriter.flush();
+		objFileWriter.close();											
 	}
 
 }

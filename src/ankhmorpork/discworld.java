@@ -1,6 +1,8 @@
 package ankhmorpork;
 import java.applet.Applet;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
@@ -22,6 +24,7 @@ import java.awt.BorderLayout;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -30,168 +33,196 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import org.json.JSONException;
+import org.json.simple.parser.ParseException;
+
 import ankhmorpork.Game.Game;
 import ankhmorpork.GameObjects.Area;
 
 public class discworld extends Applet implements ActionListener, WindowListener {
 	
+	
+	// object declaration
+	Game AnkhMorpork = new Game();
 	private static final long serialVersionUID = 1L;
-	static Frame mainFrame = new Frame( " Ank Morpork " );
-	static discworldboard discworldboard;
-	static final DoubleBufferPanel oDoubleBufferPanel = new DoubleBufferPanel();
-	static final BufferPanel oBufferPanel = new BufferPanel();
-	static final Frame fStartWindow = new Frame();
+	static Frame AnkhmorporkFrame = new Frame( " Ank Morpork " );
+	static discworldboard discworldboard = new discworldboard( );
+	static final DoubleBufferPanel doublebufferpane = new DoubleBufferPanel();
+	static final BufferPanel bufferpane = new BufferPanel();
+	static final Frame initframe = new Frame();
 	private Button Roll  = new Button( "Roll Dice" );
+
 	static final Button start2 = new Button( "Two Player" );		
 	static final Button start3 = new Button( "Three Player" );
 	static final Button start4 = new Button( "Four Player" );
 	static final Button load = new Button( "Load Game!" );
-	static final Button Quit = new Button ("Close ");
-	static final Button Exit = new Button ("Exit Game "); 
-	static final Button ViewState = new Button ("View State "); 
-	static final Button Save = new Button ("Save Game "); 
-	static final Label comments2 = new Label ("Please enter your names for player 1 and player 2 .");
-	static final Label comments4 = new Label ("");
+	static final Button Quit = new Button ("Close");
+	static final Button Exit = new Button ("Exit Game"); 
+	static final Button ViewState = new Button ("View State"); 
+	static final Button Save = new Button ("Save Game"); 
 	static final Button Info = new Button ("Rules");
-
-	Image back ;
-
-	//ashish code
-    public static void main(String argv[]) 
+	Image back;
+	
+	public static void main(String argv[]) 
     {
-
-    	Area[] AreaList = new Area[13];
-    	AreaList[0]=new Area(0,0,"Not on Board",0);
-    	AreaList[1]=new Area(1,6,"Dolly Sisters",0);
-    	AreaList[2]=new Area(2,18,"Unreal Estate",0);
-    	AreaList[3]=new Area(3,12,"Dragon's Landing",0);
-    	AreaList[4]=new Area(4,18,"Small Gods",0);
-    	AreaList[5]=new Area(5,6,"The Scours",0);
-    	AreaList[6]=new Area(6,12,"The Hippo",0);
-    	AreaList[7]=new Area(7,6,"The Shades",0);
-    	AreaList[8]=new Area(8,6,"Dimwel",0);
-    	AreaList[9]=new Area(9,12,"Longwall",0);
-    	AreaList[10]=new Area(10,12,"Isle of Gods",0);
-    	AreaList[11]=new Area(11,18,"Seven Sleepers",0);
-    	AreaList[12]=new Area(12,12,"Nap Hill",0);
-    	System.out.println("Welcome to Ankh-Morpork");	
-    	System.out.println("Enter number of Players:");
     	new discworld();
-
     }
 
- 
+	//init function
 	public void init() {
 
-		fStartWindow.setSize( 380, 390 );
-		fStartWindow.setBackground(new Color( (20), (100), (90) ));
-		fStartWindow.setLayout(new FlowLayout(FlowLayout.CENTER));
-		fStartWindow.setResizable(false);
-		Panel mainstuff = new Panel(new GridLayout(0,1));
-		//mainstuff.add(comments2);
-		//mainstuff.add(comments4);
-		mainstuff.add(new Label ("            "));
-		mainstuff.add(new Label ("          "));
-		mainstuff.add( start2 );
-		mainstuff.add( start3 );
-		mainstuff.add( start4 );
-		mainstuff.add(load);
-		mainstuff.add(Exit);
-		fStartWindow.add(mainstuff);
-		fStartWindow.setVisible( true );
+		initframe.setSize( 380, 390 );
+		initframe.setBackground(new Color( (20), (100), (90) ));
+		initframe.setLayout(new FlowLayout(FlowLayout.CENTER));
+		initframe.setResizable(false);
+		Panel initpanel = new Panel(new GridLayout(0,1));
+		initpanel.add(new Label ("            "));
+		initpanel.add(new Label ("            "));
+		initpanel.add(start2);
+		initpanel.add(start3);
+		initpanel.add(start4);
+		initpanel.add(load);
+		initpanel.add(Exit);
+		initframe.add(initpanel);
+		initframe.setVisible( true );
 		
+		load.addActionListener(this);
 		Exit.addActionListener(this);
 		Info.addActionListener(this);
 		start2.addActionListener( this );
 		start3.addActionListener( this );
 		start4.addActionListener( this );
 		
-		mainFrame.addWindowListener( this );
+		AnkhmorporkFrame.addWindowListener( this );
 	}
 	public void paint(Graphics g){
 		g.drawImage(back,15,15,this);
 	}
-	public void actionPerformed( ActionEvent e ) {
-	
-		
-	if (e.getSource() == Exit){
-		fStartWindow.setVisible(false);    
-	    }
-	
-	    
-	if (e.getSource() == start2 || e.getSource() == start3 || e.getSource() == start4 ){
-		
-			discworldboard = new discworldboard( );
-		    		
-			//String Player1, Player2, Player3, Player4;
-			
-			if(e.getSource() == start2)
-			{
-				
-				discworldboard.Two_Player_details();
-											
-			}else if(e.getSource() == start3){
-				
-				discworldboard.Three_Player_details();
-				//Player1= JOptionPane.showInputDialog("Please input mark for Player 1: ");
-				 //Player2= JOptionPane.showInputDialog("Please input mark for Player 2: ");
-				 //Player3= JOptionPane.showInputDialog("Please input mark for Player 3: ");
-			}else if(e.getSource() == start4){
-				
-				discworldboard.Four_Player_details();
-				//Player1= JOptionPane.showInputDialog("Please input mark for Player 1: ");
-				//Player2= JOptionPane.showInputDialog("Please input mark for Player 2: ");
-				//Player3= JOptionPane.showInputDialog("Please input mark for Player 3: ");
-				//Player4= JOptionPane.showInputDialog("Please input mark for Player 4: ");
+	public void actionPerformed( ActionEvent e) {
+			if (e.getSource() == Exit){
+				initframe.setVisible(false);    
 			}
-	    
-			fStartWindow.setVisible( false );
-		oDoubleBufferPanel.setLayout(new BorderLayout());
-		oBufferPanel.setLayout( new BorderLayout() );	
-		mainFrame.setSize( 2000,1500 );
-		mainFrame.setBackground(new Color( (100), (180), (150) ) ); //blue color
-		mainFrame.setLayout( new FlowLayout(FlowLayout.CENTER));
-		mainFrame.add(oDoubleBufferPanel );
-		oDoubleBufferPanel.add( "Center", oBufferPanel );
-		oBufferPanel.add( discworldboard);
-		
-		
-		Panel buttons = new Panel(new GridLayout(0,1));
-								
-				buttons.add(Roll);
-				Roll.addActionListener(new ActionListener() {
-					public void actionPerformed( ActionEvent e ) {
-							if( !discworldboard.rolled ) {
-								discworldboard.Roll();
-							}
-					}});
+			
+			if (e.getSource() == load){
+				
+					try {
+						JFileChooser chooser = new JFileChooser();
+					    chooser.setCurrentDirectory(new File("/home/me/Documents"));
+					    int retrival = chooser.showSaveDialog(null);
+					    if (retrival == JFileChooser.APPROVE_OPTION) {
+					        
+					            FileReader objFileReader = new FileReader(chooser.getSelectedFile());
+					            discworldboard.Loadgamefetch(objFileReader);
+								int i=1;
+								for(Player objPlayer: AnkhMorpork.lstPlayers)
+								{		
+									System.out.println("Player "+ i + " Details");
+									System.out.println("Player ID: "+objPlayer.getPlayer_id()+" Player Name:"+objPlayer.getPlayer_name()+" Player Color:"+objPlayer.getPlayer_color());
+									System.out.println("Player ID:"+objPlayer.getPlayer_id()+" Gold Coin Details: "+objPlayer.objGoldCoin.getCoin_Available());
+									i++;
+								}
+								Framebuilder();
 
-				buttons.add(Save);
-				Save.addActionListener(new ActionListener() {
-					public void actionPerformed( ActionEvent e ) {
-						discworldboard.SaveGame();
-					}});	
-				buttons.add(ViewState);
-				ViewState.addActionListener(new ActionListener() {
-					public void actionPerformed( ActionEvent e ) {
-						discworldboard.ViewGameState();
-					}});
-				buttons.add(Quit);
-				Quit.addActionListener(new ActionListener() {
-					public void actionPerformed( ActionEvent e ) {
-						discworldboard.quit();
-					}});
+					    } 
+						
+						
+						
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (ParseException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					
-
-
-								
-		mainFrame.add(buttons);
-		mainFrame.setVisible( true );
-		}
+					
+			}
+					    
+			if (e.getSource() == start2 || e.getSource() == start3 || e.getSource() == start4 ){
+				//discworldboard = new discworldboard( );
+				if(e.getSource() == start2){
+				
+					discworldboard.InitialiseGame(2,AnkhMorpork);
+											
+				}else if(e.getSource() == start3){	
+				
+					discworldboard.InitialiseGame(3,AnkhMorpork);
+				
+				}else if(e.getSource() == start4){
+				
+					discworldboard.InitialiseGame(4,AnkhMorpork);
+			}
+				
+				Framebuilder();
+				
+				
+					}
+ 		
 	}
-	
- 		Button exit = new Button ("<< Return Back");
+	Button exit = new Button ("<< Return Back");
 
+ 		public void Framebuilder(){
+			
+ 			initframe.setVisible( false );
+ 			doublebufferpane.setLayout(new BorderLayout());
+ 			bufferpane.setLayout( new BorderLayout() );	
+ 			AnkhmorporkFrame.setSize( 2000,1500 );
+ 			AnkhmorporkFrame.setBackground(new Color( (100), (180), (150) ) ); //blue color
+ 			AnkhmorporkFrame.setLayout( new FlowLayout(FlowLayout.CENTER));
+ 			AnkhmorporkFrame.add(doublebufferpane );
+ 			doublebufferpane.add( "Center", bufferpane );
+ 			bufferpane.add( discworldboard);
+ 			
+ 			
+ 			Panel buttons = new Panel(new GridLayout(0,1));
+ 									
+ 					buttons.add(Roll);
+ 					Roll.addActionListener(new ActionListener() {
+ 						public void actionPerformed( ActionEvent e ) {
+ 								if( !discworldboard.rolled ) {
+ 									discworldboard.Roll();
+ 								}
+ 						}});
+
+ 					buttons.add(Save);
+ 					Save.addActionListener(new ActionListener() {
+ 						public void actionPerformed( ActionEvent e ) {
+ 							try {
+ 								
+ 								JFileChooser chooser = new JFileChooser();
+ 							    chooser.setCurrentDirectory(new File("/home/me/Documents"));
+ 							    int retrival = chooser.showSaveDialog(null);
+ 							    if (retrival == JFileChooser.APPROVE_OPTION) {
+ 							        
+ 							            FileWriter objFileWriter = new FileWriter(chooser.getSelectedFile()+".txt");
+ 							            discworldboard.SaveGame(objFileWriter,AnkhMorpork);
+
+ 							    } 
+ 							} catch (IOException e1) {
+ 								// TODO Auto-generated catch block
+ 								e1.printStackTrace();
+ 							} catch (JSONException e1) {
+ 								// TODO Auto-generated catch block
+ 								e1.printStackTrace();
+ 							}
+ 						}});	
+ 					buttons.add(ViewState);
+ 					ViewState.addActionListener(new ActionListener() {
+ 						public void actionPerformed( ActionEvent e ) {
+ 							discworldboard.ViewGameState();
+ 						}});
+ 					buttons.add(Quit);
+ 					Quit.addActionListener(new ActionListener() {
+ 						public void actionPerformed( ActionEvent e ) {
+ 							discworldboard.quit();
+ 						}});
+ 						
+ 								
+ 					AnkhmorporkFrame.add(buttons);
+ 					AnkhmorporkFrame.setVisible( true );
+ 			}
+
+ 		 		
 	public void windowClosing( WindowEvent e ) {
 		System.exit( 0 );
 	}
@@ -203,7 +234,7 @@ public class discworld extends Applet implements ActionListener, WindowListener 
 	public void windowOpened( WindowEvent e ) {}
 	public void processKeyEvent (KeyEvent e) {
 		if( e.getKeyChar() =='q' || e.getKeyChar() == 'Q'){
-		    mainFrame.setVisible (false);
+			AnkhmorporkFrame.setVisible (false);
 		    System.exit(0);}
 		}
 }

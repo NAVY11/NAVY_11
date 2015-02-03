@@ -9,5 +9,5 @@ public class Game {
 	public ArrayList<Demon> lstDemons = new ArrayList<Demon>();
 	public ArrayList<Troll> lstTrolls = new ArrayList<Troll>();	
 	public ArrayList<Player> lstPlayers = new ArrayList<Player>();
-	
+		
 }

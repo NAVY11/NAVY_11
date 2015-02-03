@@ -18,8 +18,6 @@ public class Cards {
 		return iCardId;
 	}
 	
-	
-	
 	public boolean getCardPlayed()
 	{		
 		return CardPlayed;

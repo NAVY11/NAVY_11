@@ -13,10 +13,10 @@ public class Player {
 	Integer player_personality_card_id;
 	public ArrayList<Minion> lstMinions = new ArrayList<Minion>();
 	public ArrayList<Building> lstBuildings = new ArrayList<Building>();	
-	//public Coins objGoldCoin = new Coins(Constants.GoldCoin());
-	//public Coins objSilverCoin = new Coins(Constants.SilverCoin());
-	public ArrayList<Coins> lstGoldCoin = new ArrayList<Coins>();
-	public ArrayList<Coins> lstSilverCoin = new ArrayList<Coins>();
+	public Coins objGoldCoin = new Coins(Constants.GoldCoin());
+	public Coins objSilverCoin = new Coins(Constants.SilverCoin());
+	//public ArrayList<Coins> lstGoldCoin = new ArrayList<Coins>();
+	//public ArrayList<Coins> lstSilverCoin = new ArrayList<Coins>();
 	
 	public Integer getPlayer_id() {
 		return player_id;
@@ -93,10 +93,10 @@ public class Player {
 			this.lstBuildings.add(objBuilding);
 		}
 	
-		Coins GoldCoin = new Coins(Constants.GoldCoin());
-		this.lstGoldCoin.add(GoldCoin);
-		Coins SilverCoin = new Coins(Constants.SilverCoin());
-		this.lstSilverCoin.add(SilverCoin);
+//		Coins GoldCoin = new Coins(Constants.GoldCoin());
+//		this.lstGoldCoin.add(GoldCoin);
+//		Coins SilverCoin = new Coins(Constants.SilverCoin());
+//		this.lstSilverCoin.add(SilverCoin);
 	
 	}
 	
