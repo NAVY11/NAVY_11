@@ -31,22 +31,14 @@ public class GameSave {
 	{												
 		FileWriter jsonWriter = new FileWriter(File);
 		JSONObject jsonAddData = new JSONObject();
-		//Saving TROLLS
-		JSONObject jsonGameTrolls = new JSONObject();
-//		jsonGameTrolls.put("Trolls",NewGame.lstTrolls);
-//		jsonWriter.write(jsonGameTrolls.toString());
+		
+		//Saving TROLLS		
 		jsonAddData.put("Trolls",NewGame.lstTrolls);
 		
-		//Saving DEMONS
-		JSONObject jsonGameDeamons = new JSONObject();
-//		jsonGameDeamons.put("Demons",NewGame.lstDemons);
-//		jsonWriter.write(jsonGameDeamons.toString());
+		//Saving DEMONS		
 		jsonAddData.put("Demons",NewGame.lstDemons);
 		
-		//Saving Players
-		JSONObject jsonGamePlayers = new JSONObject();	
-//		jsonGamePlayers.put("Players",NewGame.lstPlayers);
-//		jsonWriter.write(jsonGamePlayers.toString());
+		//Saving Players		
 		jsonAddData.put("Players",NewGame.lstPlayers);
 		
 		int PlayerID = 1;
@@ -54,14 +46,10 @@ public class GameSave {
 		for(Player objPlayer: NewGame.lstPlayers)
 		{
 			
-			//Saving BUILDINGS
-			JSONObject jsonPlayerBuildings = new JSONObject();
-//			jsonPlayerBuildings.put("Buildings_"+PlayerID,objPlayer.lstBuildings);
-//			jsonWriter.write(jsonPlayerBuildings.toString());
+			//Saving BUILDINGS			
 			jsonAddData.put("Buildings_"+PlayerID,objPlayer.lstBuildings);
 
-			//Saving MINIONS
-			JSONObject jsonPlayerMinions = new JSONObject();			
+			//Saving MINIONS					
 			jsonAddData.put("Minions_"+PlayerID, objPlayer.lstMinions);
 			
 			//Saving GOLD COINS
